@@ -26,9 +26,7 @@ libraryDependencies ++= {
     "io.spray"           % "spray-routing" % sprayVersion,
     "io.spray"           % "spray-testkit" % sprayVersion,
     "io.spray"           % "spray-client"  % sprayVersion,
-    "io.spray"          %% "spray-json"    % "1.2.5",
-    "org.scalatest"     %% "scalatest"     % "2.0" % "test",
-    "com.typesafe"       % "config"        % "1.0.0"
+    "org.scalatest"     %% "scalatest"     % "2.0" % "test"
   )
 }
 

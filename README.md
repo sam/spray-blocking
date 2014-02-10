@@ -1,6 +1,6 @@
 # Spray Blocking Requests
 
-An example of blocking, sequential requests in Spray (undesired behavior).
+An example of blocking, sequential requests in Spray Routing (undesired behavior).
 
 Our requests take 5 seconds to complete (scheduled with the `Waiter` Actor).
 

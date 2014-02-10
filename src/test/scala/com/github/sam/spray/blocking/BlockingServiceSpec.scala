@@ -14,8 +14,6 @@ class BlockingServiceSpec extends FreeSpec with MustMatchers with ScalatestRoute
 
   def actorRefFactory = system
 
-  val waiter = system.actorOf(Props[Waiter], "waiter")
-
   "Blocking" - {
 
     "get" in {

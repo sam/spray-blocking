@@ -1,11 +1,11 @@
 package com.github.sam.spray.blocking
 
 import akka.actor._
+import scala.concurrent.Future
 
 class BlockingServiceActor extends Actor with BlockingService {
-  def actorRefFactory = context
 
-  val waiter: ActorRef = context.actorOf(Props[Waiter], "waiter")
+  def actorRefFactory = context
 
   def receive = runRoute(routes)
 }
@@ -18,14 +18,13 @@ object Waiter {
 class Waiter extends Actor {
 
   import scala.concurrent.duration._
+  import context._
 
-  implicit val ec = context.dispatcher
+  var count = 0
 
   def receive = {
     case Waiter.Wait(message) =>
-      val sender = context.sender
-      context.system.scheduler.scheduleOnce(5 seconds) {
-        sender ! message
-      }
+      count += 1
+      context.system.scheduler.scheduleOnce(5 seconds, sender, s"$count ${self}: $message")
   }
 }

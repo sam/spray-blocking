@@ -1,8 +1,9 @@
 package com.github.sam.spray.blocking
 
 import spray.routing.HttpService
-import spray.http.StatusCodes._
 import akka.actor._
+import scala.concurrent.Future
+import akka.routing.RoundRobinRouter
 
 trait BlockingService extends HttpService {
 
@@ -12,7 +13,7 @@ trait BlockingService extends HttpService {
   import akka.pattern.ask
   implicit val timeout = akka.util.Timeout(10 seconds)
 
-  val waiter: ActorRef
+  val waiter = actorRefFactory.actorOf(Props[Waiter].withRouter(RoundRobinRouter(4)))
 
   val routes = path("") {
     get {
