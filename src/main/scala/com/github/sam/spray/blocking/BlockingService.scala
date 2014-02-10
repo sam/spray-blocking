@@ -13,7 +13,7 @@ trait BlockingService extends HttpService {
   import akka.pattern.ask
   implicit val timeout = akka.util.Timeout(10 seconds)
 
-  val waiter = actorRefFactory.actorOf(Props[Waiter].withRouter(RoundRobinRouter(4)))
+  val waiter = actorRefFactory.actorOf(Props[Waiter])
 
   val routes = path("") {
     get {
